@@ -69,7 +69,7 @@ async def on_message(message):
                             resulta = response_json['releases'][len(response_json["releases"]) - 1]["download_url"]
                             print(resulta)
                             await message.channel.send(f" https://mods.factorio.com{resulta}")
-                            url_download = f"https://mods.factorio.com{resulta}?username=0won2&token=abca759aee1cd2a48aea82c3e2fa5b"
+                            url_download = f"https://mods.factorio.com{resulta}?username=0won2&token={token}"
                             r = requests.get(url_download)
                             with open(response_json['releases'][len(response_json["releases"]) - 1]["file_name"],'wb') as outfile:
                                 outfile.write(r.content)
