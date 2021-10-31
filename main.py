@@ -1,10 +1,18 @@
+import subprocess
+
 import nextcord
 import json
 import requests
 import os
 import zipfile
+import subprocess
 client = nextcord.Client()
+tokenfact = ""
 
+def dw_embed(title,name,link):
+    Embed_1 = nextcord.Embed(title=title, color=0x00ff00)
+    Embed_1.add_field(name=name, value=link)
+    return Embed_1
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
@@ -62,14 +70,13 @@ async def on_message(message):
                         agreement = await client.wait_for('message', check=is_correct, timeout=30.0)
                         if agreement.content.find("factorio") != -1:
                             mod_name = agreement.content.split("mod/")[1]
-                            await message.channel.send(mod_name)
                             url = f'https://mods.factorio.com/api/mods/{mod_name}'
+                            await message.channel.send(embed=dw_embed("모드 설치", mod_name, url))
                             response = requests.get(url)
                             response_json = json.loads(response.text)
                             resulta = response_json['releases'][len(response_json["releases"]) - 1]["download_url"]
                             print(resulta)
-                            await message.channel.send(f" https://mods.factorio.com{resulta}")
-                            url_download = f"https://mods.factorio.com{resulta}?username=0won2&token={token}"
+                            url_download = f"https://mods.factorio.com{resulta}?username=0won2&token={tokenfact}"
                             r = requests.get(url_download)
                             with open(response_json['releases'][len(response_json["releases"]) - 1]["file_name"],'wb') as outfile:
                                 outfile.write(r.content)
@@ -85,7 +92,12 @@ async def on_message(message):
                                 with open(f"{os.getcwd()}/{response_json['name']}_{response_json['releases'][len(response_json['releases']) - 1]['version']}/info.json") as f:
                                     essential_json = json.load(f)
                             mod_zip.close()
-
+                            try:
+                                src = f"{os.getcwd()}/{response_json['releases'][len(response_json['releases']) - 1]['file_name']}"
+                                des = f"{os.getcwd()}/factorio/mods/{response_json['releases'][len(response_json['releases']) - 1]['file_name']}"
+                                os.rename(src, des)
+                            except FileExistsError:
+                                await message.channel.send("이미 있는 모드입니다. 업데이트를 하실목적이라면 업데이트 창을 이용해주세요")
                             print(essential_json)
                             essential_list = list()
                             count = 0
@@ -103,25 +115,44 @@ async def on_message(message):
                             if len(essential_list) == 0:
                                 await message.channel.send("추가 모드가 필요하지 않습니다")
                             else:
-                                await message.channel.send(embed=embed_mod)
+                                msg = await message.channel.send(embed=embed_mod)
                                 await message.channel.send("추가 모드를 설치합니다. 시간이 소요될수 있습니다")
-                                for a in range(len(essential_list)):
-                                    mod_name = essential_list[a]
-                                    await message.channel.send(mod_name)
+
+                                embed5 = nextcord.Embed(title="추가모드 설치", color=0xafeeee)
+                                msg = await message.channel.send(embed=embed5)
+                                for s in range(len(essential_list)):
+                                    print(s)
+                                    mod_name = essential_list[s]
                                     url = f'https://mods.factorio.com/api/mods/{mod_name}'
+                                    embed5.add_field(name=mod_name, value=url, inline=False)
+                                    await msg.edit(embed=embed5)
                                     response = requests.get(url)
                                     response_json = json.loads(response.text)
-                                    resulta = response_json['releases'][len(response_json["releases"]) - 1][
-                                        "download_url"]
-                                    print(resulta)
-                                    await message.channel.send(f" https://mods.factorio.com{resulta} 를 설치합니다")
-                                    url_download = f"https://mods.factorio.com{resulta}?username=0won2&token={token}"
+                                    resulta = response_json['releases'][len(response_json["releases"]) - 1]["download_url"]
+                                    url_download = f"https://mods.factorio.com{resulta}?username=0won2&token={tokenfact}"
                                     r = requests.get(url_download)
-                                    with open(
-                                            response_json['releases'][len(response_json["releases"]) - 1]["file_name"], 'wb') as outfile:
+                                    with open(response_json['releases'][len(response_json["releases"]) - 1]["file_name"], 'wb') as outfile:
                                         outfile.write(r.content)
+                                    try:
+                                        src = f"{os.getcwd()}/{response_json['releases'][len(response_json['releases']) - 1]['file_name']}"
+                                        des = f"{os.getcwd()}/factorio/mods/{response_json['releases'][len(response_json['releases']) - 1]['file_name']}"
+                                        os.rename(src, des)
+                                    except FileExistsError:
+                                        await message.channel.send("이미 있는 모드입니다.")
+                            embed_run = nextcord.Embed(title="서버 구동", description="모드 적용을 위해 재시작이 필요합니다.",color=0x0000ff)
+                            embed_run.add_field(name="1. 재시작", value="⠀", inline=False)
+                            embed_run.add_field(name="2. 나중에", value="⠀", inline=False)
+                            await message.channel.send(embed=embed_run)
+                            agreement = await client.wait_for('message', check=is_correct, timeout=30.0)
+                            if agreement.content == "1":
+                                desti = os.getcwd()
+                                cmd = f'{desti}/factorio/bin/x64/factorio.exe --start-server {desti}/factorio/bin/x64/saves/my-save.zip --server-settings {desti}/factorio/bin/x64/server-settings.json'
+                                run = subprocess.Popen(cmd.split(" "))
 
+                                await message.channel.send("재시작하였습니다.")
 
+                            if agreement.content == "2":
+                                await message.channel.send("추후 꼭 재시작을 하시길 바랍니다.")
 
 
 
@@ -130,7 +161,56 @@ async def on_message(message):
                     if agreement.content == "2":
                         await message.channel.send("세팅중")
                     if agreement.content == "3":
-                        await message.channel.send("아직 준비중이에요!")
+                        embed_update = nextcord.Embed(title="모드 업데이트 필요", description="업데이트가 필요한 모드들을 보여줍니다", color=0xb698f9)
+                        msg = await message.channel.send(embed=embed_update)
+                        mod_list = os.listdir(f"{os.getcwd()}/factorio/mods")
+                        print(mod_list)
+                        update_list =[]
+                        for a in range(len(mod_list)):
+                            if mod_list[a] != "mod-list.json":
+                                mod_version = mod_list[a].replace('.zip', '')
+                                mod_version = mod_version.split("_")
+                                version = mod_version[len(mod_version) - 1]
+                                del mod_version[len(mod_version) - 1]
+                                mod = '_'.join(mod_version)
+                                print(mod_list[a])
+                                url = f'https://mods.factorio.com/api/mods/{mod}'
+                                response = requests.get(url)
+                                response_json = json.loads(response.text)
+                                version2 = response_json['releases'][len(response_json["releases"]) - 1]["version"]
+                                if version != version2:
+                                    embed_update.add_field(name=mod, value=f"현재 설치된 버전은 {version}이며 최신버전은 {version2} 입니다.", inline=False)
+                                    update_list.append(f"{mod}//{version}")
+
+                        await msg.edit(embed=embed_update)
+                        embed_updating = nextcord.Embed(title="업데이트 모드", description="현재 업데이트 중인 모드입니다.", color=0xff99cc)
+                        msg = await message.channel.send(embed=embed_updating)
+                        for a in range(len(update_list)):
+                            url = f"https://mods.factorio.com/api/mods/{update_list[a].split('//')[0]}"
+                            embed_updating.add_field(name=update_list[a].split('//')[0],value=url , inline=False)
+                            await msg.edit(embed=embed_updating)
+                            response = requests.get(url)
+                            response_json = json.loads(response.text)
+                            resulta = response_json['releases'][len(response_json["releases"]) - 1]["download_url"]
+                            url_download = f"https://mods.factorio.com{resulta}?username=0won2&token={tokenfact}"
+                            r = requests.get(url_download)
+                            with open(response_json['releases'][len(response_json["releases"]) - 1]["file_name"],'wb') as outfile:
+                                outfile.write(r.content)
+                            try:
+                                os.remove(f'{os.getcwd()}/factorio/mods/{update_list[a].replace("//","_")}.zip')
+                                src = f"{os.getcwd()}/{response_json['releases'][len(response_json['releases']) - 1]['file_name']}"
+                                des = f"{os.getcwd()}/factorio/mods/{response_json['releases'][len(response_json['releases']) - 1]['file_name']}"
+                                os.rename(src, des)
+                            except FileExistsError:
+                                src = f"{os.getcwd()}/{response_json['releases'][len(response_json['releases']) - 1]['file_name']}"
+                                des = f"{os.getcwd()}/factorio/mods/{response_json['releases'][len(response_json['releases']) - 1]['file_name']}"
+                                os.rename(src, des)
+                        await message.channel.send("완료되었습니다.")
+
+
+
+
+
                 else:
                     embed2 = nextcord.Embed(title="거절", description="권한이 없으셔서 모드 접근이 막혀있습니다", color=0xff0000)
                     embed2.add_field(name="1. 권한요청", value="모드 수정 권한을 요청합니다", inline=False)
@@ -142,8 +222,23 @@ async def on_message(message):
                     if agreement2.content == "2":
                         await message.channel.send("도움을 드리지 못해 죄송합니다.")
         elif agreement1.content == "2":
-                await  message.channel.send("ASAP it will be abled")
+                mod_list = os.listdir(f"{os.getcwd()}/factorio/mods")
+                print(mod_list)
+                embed6 = nextcord.Embed(title="모드들입니다!", description="공원서버에 다운로드 되어 있는 모드들을 보여줍니다", color=0xf6546a)
+                for a in range(len(mod_list)):
+                    if mod_list[a] != "mod-list.json":
+                        mod_version = mod_list[a].replace('.zip','')
+                        mod_version = mod_version.split("_")
+                        version = mod_version[len(mod_version) -1]
+                        del mod_version[len(mod_version) -1]
+                        mod = '_'.join(mod_version)
+                        embed6.add_field(name=f"{mod}", value=f"설치된 버전:{version}", inline=False)
+                        print(mod_list[a])
+                await message.channel.send(embed=embed6)
+
+
         elif agreement1.content == "3":
-                await  message.channel.send("취소되었습니다!")
+                await message.channel.send("취소되었습니다!")
         elif agreement1.content == "4":
                 await message.channel.send("관리자들에게 전달되었습니다. 심사후 권한 부여 여부를 알려드립니다.")
+client.run('')
