@@ -12,6 +12,6 @@
 
 <h2>Credit</h2>
 
-Developed By 0won in Gyeonggi-do
+Bot Developed By 0won in Gyeonggi-do
 <br>
 README.md Designed by ApplePay1020 in Gyeonggi-do
