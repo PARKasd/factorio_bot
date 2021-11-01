@@ -2,15 +2,14 @@
 
 Factorio 서버 관리용 디스코드 봇
 
-## working 
+## 작동중
  - 모드 다운로드 필수 모드 자동 다운로드 모드 업데이트 & 버전 확인 
  - 모드 삭제 
  - 서버 재시작 
  
-## not_working
+## 에러 수정중
 
-
-## need to be developed 
+## 개발중
 
  - map gen setting  
  - 서버 설정 
