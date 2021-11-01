@@ -12,6 +12,6 @@
 
 <h2>Credit</h2>
 
-<h7>Developed By 0won in Gyeonggi-do</h7>
+Developed By 0won in Gyeonggi-do
 <br>
-<h8>README.md Designed by ApplePay1020 in Gyeonggi-do</h8>
+README.md Designed by ApplePay1020 in Gyeonggi-do
