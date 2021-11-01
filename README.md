@@ -19,4 +19,6 @@ Factorio 서버 관리용 디스코드 봇
 
 Bot Developed By 0won
 <br>
-README.md Designed by ApplePay1020
+README.md Designed by 0won & ApplePay1020
+<br>
+My teacher FennecFoxSW
