@@ -4,10 +4,11 @@ Factorio 서버 관리용 디스코드 봇
 
 ## working 
  - 모드 다운로드 필수 모드 자동 다운로드 모드 업데이트 & 버전 확인 
-
-## not_working
  - 모드 삭제 
  - 서버 재시작 
+ 
+## not_working
+
 
 ## need to be developed 
 
