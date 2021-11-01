@@ -17,6 +17,6 @@ Factorio 서버 관리용 디스코드 봇
 
 ## Credit
 
-Bot Developed By 0won in Gyeonggi-do
+Bot Developed By 0won
 <br>
-README.md Designed by ApplePay1020 in Gyeonggi-do
+README.md Designed by ApplePay1020
