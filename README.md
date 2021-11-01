@@ -1,4 +1,4 @@
-# <img src="https://github.com/PARKasd/factorio_bot-working/blob/main/src/qOiiCE6c.png" width="48" height="48"/> Factorio Bot beta
+# <img src="https://github.com/PARKasd/factorio_bot-working/blob/main/src/qOiiCE6c_resiz.png" width="48" height="48"/> Factorio Bot beta
 
 Factorio 서버 관리용 디스코드 봇
 
