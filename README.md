@@ -1,3 +1,4 @@
+<img src="https://github.com/PARKasd/factorio_bot-working/blob/main/src/qOiiCE6c.png">
 # factorio_bot_beta
 
 
