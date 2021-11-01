@@ -7,6 +7,6 @@
 <h2> not_working </br>
 <h4> 모드 삭제 </br>서버 재시작 </br>
 
-<h2> working </br>
+<h2> need to be developed </br>
 <h4> map gen setting </br> 서버 설정 </br> 저장된 맵 업로드
 
