@@ -10,6 +10,8 @@
 <h2> need to be developed </h2>
 <h4> map gen setting </br> 서버 설정 </br> 저장된 맵 업로드</h4>
 
+<h4>Credit</h4>
+
 <h7>Developed By 0won in Gyeonggi-do</h7>
 <br>
 <h8>README.md Designed by ApplePay1020 in Gyeonggi-do</h8>
