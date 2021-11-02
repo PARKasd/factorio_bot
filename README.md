@@ -2,7 +2,7 @@
 
 Factorio sever mod manage bot(en)
 <br>
-[kr information](https://)
+[kr](https://github.com/PARKasd/factorio_bot-working/blob/main/readme_kr.md)
 ## v1 (current)
  - manage mod (add&del&update)
  - restart server(unstable. killing server may damage cilent map)
