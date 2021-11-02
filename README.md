@@ -2,7 +2,7 @@
 
 Factorio sever mod manage bot(en)
 <br>
-[kr](https://github.com/PARKasd/factorio_bot-working/blob/main/readme_kr.md)
+
 ## v1 (current)
  - manage mod (add&del&update)
  - restart server(unstable. killing server may damage cilent map)
@@ -21,3 +21,5 @@ Bot Developed By 0won
 README.md Designed by 0won & ApplePay1020
 <br>
 My teacher FennecFoxSW
+
+[Korean](https://github.com/PARKasd/factorio_bot-working/blob/main/readme_kr.md)
