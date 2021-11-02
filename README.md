@@ -2,21 +2,10 @@
 
 Factorio sever mod manage bot(en)
 <br>
-[Kor ver](https://github.com/PARKasd/factorio_bot-working/blob/main/readme_kr.md)
+[kr_ver](https://github.com/PARKasd/factorio_bot-working/blob/main/readme_kr.md)
 <br>
-[En ver](https://github.com/PARKasd/factorio_bot-working/blob/main/readme.md)
+[en_ver](https://github.com/PARKasd/factorio_bot-working/blob/main/readme_en.md)
 
-
-## v1 (current)
- - manage mod (add&del&update)
- - restart server(unstable. killing server may damage cilent map)
-
-## current version error
-- not found. plz tell me if you find bugs
-## for v2 (future development blueprint)
- - map gen setting  
- - server open setting
- - mod search inside
 
 ## Credit
 
