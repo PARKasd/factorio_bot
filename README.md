@@ -3,6 +3,7 @@
 Factorio sever mod manage bot(en)
 <br>
 [Kor ver](https://github.com/PARKasd/factorio_bot-working/blob/main/readme_kr.md)
+<br>
 [En ver](https://github.com/PARKasd/factorio_bot-working/blob/main/readme.md)
 
 
