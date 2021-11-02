@@ -1,19 +1,17 @@
 # <img src="https://github.com/PARKasd/factorio_bot-working/blob/main/src/qOiiCE6c_resiz.png" width="48" height="48"/> Factorio Bot beta
 
-Factorio 서버 관리용 디스코드 봇
+Factorio sever mod manage bot
 
-## 작동중
- - 모드 다운로드 필수 모드 자동 다운로드 모드 업데이트 & 버전 확인 
- - 모드 삭제 
- - 서버 재시작 
+## v1 (current)
+ - manage mod (add&del&update)
+ - restart server(unstable. killing server may damage cilent map)
  
-## 에러 수정중
-
-## 개발중
-
+## current version error
+- not found. plz tell me if you find bugs
+## for v2 (future development blueprint)
  - map gen setting  
- - 서버 설정 
- - 저장된 맵 업로드
+ - server open setting
+ - mod search inside
 
 ## Credit
 
