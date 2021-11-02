@@ -2,6 +2,9 @@
 
 Factorio sever mod manage bot(en)
 <br>
+###[Kor ver](https://github.com/PARKasd/factorio_bot-working/blob/main/readme_kr.md)
+###[En ver](https://github.com/PARKasd/factorio_bot-working/blob/main/readme.md)
+
 
 ## v1 (current)
  - manage mod (add&del&update)
@@ -21,5 +24,3 @@ Bot Developed By 0won
 README.md Designed by 0won & ApplePay1020
 <br>
 My teacher FennecFoxSW
-
-[Korean](https://github.com/PARKasd/factorio_bot-working/blob/main/readme_kr.md)
