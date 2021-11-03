@@ -16,7 +16,7 @@ async def on_ready():
     print(f'We have logged in as {client.user}')
 
     desti = os.getcwd()
-    cmd = f'{desti}/factorio/bin/x64/factorio.exe --start-server {desti}/factorio/bin/x64/saves/my-save.zip --server-settings {desti}/factorio/bin/x64/server-settings.json'
+    cmd = f'./factorio/bin/x64/factorio --start-server {desti}/factorio/bin/x64/saves/my-save.zip --server-settings {desti}/factorio/bin/x64/server-settings.json'
     global run
     run = subprocess.Popen(cmd.split(" "))
 allowed_ids = {
@@ -47,7 +47,7 @@ async def on_message(message):
             await message.channel.send("권한이 없으시네영")
     if message.content.startswith('!start'):
         desti = os.getcwd()
-        cmd = f'{desti}/factorio/bin/x64/factorio.exe --start-server {desti}/factorio/bin/x64/saves/my-save.zip --server-settings {desti}/factorio/bin/x64/server-settings.json'
+        cmd = f'./factorio/bin/x64/factorio --start-server {desti}/factorio/bin/x64/saves/my-save.zip --server-settings {desti}/factorio/bin/x64/server-settings.json'
         global run
         run = subprocess.Popen(cmd.split(" "))
     if message.content.startswith("!kill"):
@@ -249,7 +249,7 @@ async def on_message(message):
                                         os.remove(f"{os.getcwd()}/factorio/mods/{f_name}")
                             await msg.edit("완료되었습니다!")
                             desti = os.getcwd()
-                            cmd = f'{desti}/factorio/bin/x64/factorio.exe --start-server {desti}/factorio/bin/x64/saves/my-save.zip --server-settings {desti}/factorio/bin/x64/server-settings.json'
+                            cmd = f'./factorio/bin/x64/factorio --start-server {desti}/factorio/bin/x64/saves/my-save.zip --server-settings {desti}/factorio/bin/x64/server-settings.json'
 
                             run = subprocess.Popen(cmd.split(" "))
 
