@@ -1,3 +1,4 @@
+
 import nextcord
 import json
 import requests
@@ -151,24 +152,11 @@ async def on_message(message):
                                         os.rename(src, des)
                                     except FileExistsError:
                                         await message.channel.send("이미 있는 모드입니다.")
-                            embed_run = nextcord.Embed(title="서버 구동", description="모드 적용을 위해 재시작이 필요합니다.",color=0x0000ff)
-                            embed_run.add_field(name="1. 재시작", value="⠀", inline=False)
-                            embed_run.add_field(name="2. 나중에", value="⠀", inline=False)
-                            await message.channel.send(embed=embed_run)
-                            agreement_a = await client.wait_for('message', check=is_correct, timeout=30.0)
-                            if agreement_a.content == "1":
-                                desti = os.getcwd()
-                                try:
-                                    run.kill()
-                                    run
-                                except:
-                                    run
-                                await message.channel.send("재시작하였습니다.")
-
-                            if agreement_a.content == "2":
-                                await message.channel.send("추후 꼭 재시작을 하시길 바랍니다.")
-
-
+                            run.kill()
+                            desti = os.getcwd()
+                            cmd = f'./factorio/bin/x64/factorio --start-server {desti}/factorio/bin/x64/saves/my-save.zip --server-settings {desti}/factorio/bin/x64/server-settings.json'
+                            run = subprocess.Popen(cmd.split(" "))
+                            await message.channel.send("재시작하였습니다.")
 
                         else:
                             await message.channel.send("등록을 취소합니다!")
@@ -192,8 +180,8 @@ async def on_message(message):
                         embed_ex.add_field(name="방법 1", value="삭제하고 싶은 모드의 번호를 입력 ex) 15", inline=False)
                         embed_ex.add_field(name="방법 2", value="삭제하고 싶은 모드들의 번호를 입력 ex) 1,4,5", inline=False)
                         await message.channel.send(embed = embed_ex)
-                        agreement = await client.wait_for('message', check=is_correct, timeout=60.0)
-                        rem_list = agreement.content.split(",")
+                        agreementa = await client.wait_for('message', check=is_correct, timeout=60.0)
+                        rem_list = agreementa.content.split(",")
                         rem_list_embed = nextcord.Embed(title="삭제 대상 모드", description="같이 설치된 필수모드도 삭제됩니다.", color=0xff0000)
                         msg = await message.channel.send(embed=rem_list_embed)
                         run.kill()
@@ -225,7 +213,7 @@ async def on_message(message):
                                     f"{rem_mod_list[a].replace('.zip', '')}/info.json",
                                     os.getcwd())
                                 with open(
-                                        f"{os.getcwd()}/{rem_mod_list[a].replace('.zip', '')}_{version}/info.json") as f:
+                                        f"{os.getcwd()}/{rem_mod_list[a].replace('.zip', '')}/info.json") as f:
                                     essential_json = json.load(f)
                             mod_zip.close()
                             essential_list = list()
@@ -249,6 +237,7 @@ async def on_message(message):
                                     if f_name.startswith(final[a]):
                                         os.remove(f"{os.getcwd()}/factorio/mods/{f_name}")
                             await msg.edit("완료되었습니다!")
+                            run.kill()
                             desti = os.getcwd()
                             cmd = f'./factorio/bin/x64/factorio --start-server {desti}/factorio/bin/x64/saves/my-save.zip --server-settings {desti}/factorio/bin/x64/server-settings.json'
 
@@ -343,4 +332,4 @@ async def on_message(message):
                 await message.channel.send("취소되었습니다!")
         elif agreement1.content == "4":
                 await message.channel.send("관리자들에게 전달되었습니다. 심사후 권한 부여 여부를 알려드립니다.")
-client.run(token)
+client.run('token')
