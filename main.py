@@ -5,6 +5,7 @@ import os
 import zipfile
 import subprocess
 client = nextcord.Client()
+token = ""
 tokenfact = ""
 
 def dw_embed(title,name,link):
@@ -342,3 +343,4 @@ async def on_message(message):
                 await message.channel.send("취소되었습니다!")
         elif agreement1.content == "4":
                 await message.channel.send("관리자들에게 전달되었습니다. 심사후 권한 부여 여부를 알려드립니다.")
+client.run(token)
